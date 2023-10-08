@@ -324,16 +324,16 @@ main {
     font-weight: 400;
 }
 
-.nuevo-gasto {
+.new-charge {
     position: fixed;
     bottom: 5rem;
     right: 5rem;
 }
 
-.nuevo-gasto img {
+.new-charge img {
     width: 5rem;
 }
-.nuevo-gasto img:hover {
+.new-charge img:hover {
     cursor: pointer;
 }
 
@@ -345,14 +345,14 @@ main {
     right: 0;
     bottom: 0;
 }
-.modal .cerrar-modal {
+.modal .close-modal {
     position: absolute;
     right: 3rem;
     top: 3rem;
     width: 3rem;
     height: 3rem;
 }
-.modal .cerrar-modal img {
+.modal .close-modal img {
     width: 100%;
 }
 
@@ -371,12 +371,12 @@ body .modal {
     overflow: hidden;
 }
 
-.modal .budget.animar {
+.modal .budget.animate {
     position: relative;
     opacity: 1;
 }
 
-.modal .budget.cerrar {
+.modal .budget.close {
     opacity: 0;
 }
 
