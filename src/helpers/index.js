@@ -5,3 +5,15 @@ export const generateID = () => {
 
     return random + dateForId
 }
+
+export const formatdate = dateOf => {
+    const dateOfCharge = new Date(dateOf)
+
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: '2-digit',
+    }
+
+    return dateOfCharge.toLocaleDateString ('en-US', options)
+}

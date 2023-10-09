@@ -6,35 +6,37 @@ import { generateID } from "./helpers";
 import ChargesList from "./components/ChargesList";
 
 function App() {
-  const [budget, setBudget] = useState(0);
-  const [isValidBudget, setIsValidBudget] = useState(false);
+  const [budget, setBudget] = useState(0)
+  const [isValidBudget, setIsValidBudget] = useState(false)
 
-  const [modal, setModal] = useState(false);
-  const [animateModal, setAnimateModal] = useState(false);
-  const [charges, setCharges] = useState([]);
+  const [modal, setModal] = useState(false)
+  const [animateModal, setAnimateModal] = useState(false)
+  const [charges, setCharges] = useState([])
 
   const handleNewCharge = () => {
-    setModal(true);
+    setModal(true)
 
     setTimeout(() => {
-      setAnimateModal(true);
-    }, 500);
+      setAnimateModal(true)
+    }, 500)
   };
 
   const saveCharge = (charge) => {
-    charge.id = generateID();
-    setCharges(...charges, charge);
+    charge.id = generateID()
+    charge.dateOf = Date.now()
+    setCharges([...charges, charge])
 
-    setAnimateModal(false);
+    setAnimateModal(false)
 
     setTimeout(() => {
-      setModal(false);
-    }, 500);
-  };
+      setModal(false)
+    }, 500)
+  }
 
   return (
-    <div>
+    <div className={modal ? 'lock' : ''}>
       <Header
+        charges={charges}
         budget={budget}
         setBudget={setBudget}
         isValidBudget={isValidBudget}
@@ -43,7 +45,7 @@ function App() {
       {isValidBudget && (
         <>
         <main>
-          <ChargesList />
+          <ChargesList charges={charges}/>
         </main>
           <div className="new-charge">
             <img
