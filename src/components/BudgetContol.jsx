@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
       setAvailable(totalAvailable)
       setSpent(totalSpent);
-    }, [charges]);
+    }, [charges, budget]);
 
   const moneyFormat = (amount) => {
     return amount.toLocaleString("en-US", {
