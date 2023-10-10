@@ -4,15 +4,20 @@ import iconNewCharge from "./assets/new-charge.svg";
 import Modal from "./components/Modal";
 import { generateID } from "./helpers";
 import ChargesList from "./components/ChargesList";
+import FilterCharges from "./components/FilterCharges";
 
 function App() {
-  const [budget, setBudget] = useState(0)
+  const [budget, setBudget] = useState(
+    Number(localStorage.getItem('budget')) ?? 0
+  )
   const [isValidBudget, setIsValidBudget] = useState(false)
-
   const [modal, setModal] = useState(false)
   const [animateModal, setAnimateModal] = useState(false)
-  const [charges, setCharges] = useState([])
-
+  const [charges, setCharges] = useState(
+    localStorage.getItem('charges') ? JSON.stringify(localStorage.getItem('charges')) : []
+  )
+  const [filter, setFilter] = useState('')
+  const [filterCharges, setFilterCharges] = useState([])
   const [editCharges, setEditCharges] = useState({})
 
   useEffect(() => {
@@ -24,7 +29,29 @@ function App() {
       }, 500)
     }
   }, [editCharges])
+
+  useEffect(() => {
+    localStorage.setItem('budget', budget ?? 0)
+  },[budget])
+
+  useEffect(() => {
+    localStorage.setItem('charges', JSON.stringify(charges) ?? [])
+  }, [charges])
   
+  useEffect(() => {
+    const budgetLS = Number(localStorage.getItem('budget')) ?? 0
+
+    if( budgetLS > 0 ){
+      setIsValidBudget(true)
+    }
+  },[])
+
+  useEffect(() => {
+    if(filter){
+      const filteredCharges = charges.filter( charge => charge.category === filter)
+      setFilterCharges(filteredCharges)
+    }
+  }, [filter, charges])
 
   const handleNewCharge = () => {
     setModal(true)
@@ -63,6 +90,7 @@ function App() {
     <div className={modal ? 'lock' : ''}>
       <Header
         charges={charges}
+        setCharges={setCharges}
         budget={budget}
         setBudget={setBudget}
         isValidBudget={isValidBudget}
@@ -71,10 +99,16 @@ function App() {
       {isValidBudget && (
         <>
         <main>
+          <FilterCharges
+            filter={filter}
+            setFilter={setFilter}  
+          />
           <ChargesList 
           charges={charges}
           setEditCharges={setEditCharges}
           deleteCharge={deleteCharge}
+          filter={filter}
+          filterCharges={filterCharges}
           />
         </main>
           <div className="new-charge">

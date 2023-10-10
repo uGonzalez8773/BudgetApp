@@ -209,9 +209,9 @@ header h1 {
         text-align: left;
     }
 }
-.validBudget p.negativo,
-.validBudget p.negativo span {
-    color: red;
+.validBudget p.negative,
+.validBudget p.negative span {
+    color: #DC2626;
 }
 .validBudget span {
     font-weight: 900;
@@ -239,17 +239,17 @@ main {
     padding-top: 10rem;
 }
 
-.filtros .mainBudget {
+.filter .mainBudget {
     display: flex;
     align-items: center;
     gap: 2rem;
 }
-.filtros label {
+.filter label {
     font-size: 3rem;
     font-weight: 900;
     color: var(--gris-oscuro);
 }
-.filtros select {
+.filter select {
     flex: 1;
     padding: 1rem;
     border: none;
